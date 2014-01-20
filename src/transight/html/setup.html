@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="css/layout.css" rel="stylesheet" type="text/css"></link>
+    <script type="text/javascript" src="js/Jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <title>Transight | Login</title>
+    <body>
+        <div id="dash-map">
+            <div id="dashboard">
+                <div id="colored-panel">
+                    <div id="login-image">
+                        <img src="images/login-image.jpg"/>
+                    </div>
+                </div>
+                <div id="simple-form-panel">
+                    <div id="login-form">
+                        <form action="" method="POST" id="login" onsubmit="">
+                            <table align="center" cellpadding="0" cellspacing="10">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" height="180">
+                                            <img src="images/login-logo.jpg"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="invalid-user" style="color: red;display: none">Invalid credentials</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="invalid-company_name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input name="company_name" autocomplete="ON" placeHolder="Company" id="company_name" type="text"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="invalid-username"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input name="username" autocomplete="ON" placeHolder="Username" id="username" type="text"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="invalid-password"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input name="password" id="password" autocomplete="ON" type="password" placeHolder="Password"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input value="Login" type="submit"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="throbber" style="display: none"></div>
+    </body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!--link href="css/layout.css" rel="stylesheet" type="text/css"></link-->
+        <link href="css/transight.css" rel="stylesheet" type="text/css"></link>
+        <script type="text/javascript" src="js/Jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+        <title>Dashboard | Transight</title>
+        <!--tabs-->
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $('#col2-tab2').hide();
+                $('#col2-tab1').show();
+                $('#tabs2 ul li a').each(function()
+                {
+                    $(this).click(function(event)
+                    {
+                        $('#tabs2 ul li').attr('class','');
+                        var href = $(this).attr("href");
+                        $(this).parent().addClass('active');
+                        href = href.replace("#","");
+                        $('#col2-tab2').hide();
+                        $('#col2-tab1').hide();
+                        $("#"+href).show();
+                        event.preventDefault();
+                        return false;
+                       
+                    });                    
+                });
+                
+                $('#col1-tab2').hide();
+                $('#col1-tab1').show();
+                $('#tabs1 ul li a').each(function()
+                {
+                    $(this).click(function(event)
+                    {
+                        $('#tabs1 ul li').attr('class','');
+                        var href = $(this).attr("href");
+                        href = href.replace("#","");
+                        $('#col1-tab2').hide();
+                        $('#col1-tab1').hide();
+                        $("#"+href).show();
+                        $(this).parent().addClass('active');
+                        event.preventDefault();
+                        return false;
+                       
+                    });                    
+                });
+                
+                $('#nav li').hover(function()
+                {
+                    var child = $(this).children(0)[0];
+                    if(child.nodeName!="A")
+                    {
+                        $(this).attr("class","span_hover");
+                    }
+                    else
+                    {
+                        console.log($(child).parent().parent());
+                        $("#nav li").css("height","");
+                    }
+                    $('ul', this).fadeIn(100);
+                },
+                function()
+                {
+                    $('ul', this).fadeOut(10);
+                    $(this).attr("class","");
+                });
+                    
+                var $items = $('#vtab ul li');
+                $items.mouseover(function()
+                {
+                    $items.removeClass('selected');
+                    $(this).addClass('selected');
+                    var index = $items.index($(this));
+                    $('#vtab span').hide().eq(index).show();
+                }).eq(1).mouseover();
+            });
+        </script>
+    </head>
+    <body>
+        <!--Welcome header and the logo-->
+        <div class="header">
+            <div class="transightlogo">
+                <img src="images/transight-logo-new.png" alt="Transight" />
+            </div>
+            <div class="welcomemessagediv">
+                <div class="welcomemessage">Welcome,testuser</div>
+                <div class="userimage">
+                    <img src="images/alto.jpg"/>
+                </div>
+                <div class="logout">
+                    Logout
+                </div>
+            </div>
+        </div>
+        <!--Welcome header and the logo ends-->
+
+        <div class="contents">
+            <div class="menubar">
+                <!--Menu part-->
+                <div class="menus">
+                    <ul id="nav">
+                        <li>
+                            <span onclick="window.location.href='dashboard.html'">Home</span>
+                        </li>
+                        <li>
+                            <span>Vehicles</span>
+                            <ul>
+                                <li>
+                                    <a href="#/vehicle/status_screen"> Vehicle Status</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/vehicle_report"> View Vehicles</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/general_report"> General Report</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/halt_report"> Trip Reports</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/fuel_alert"> Fuel Refills</a>
+                                </li>
+                                <li>
+                                    <a href="#/immobilizer/immobilizer_view"> Immobilizer</a>
+                                </li>
+                                <li>
+                                    <a href="#/#"> Safe Parking</a>
+                                </li>
+                                <li>
+                                    <a href="#/vehicle/vehicle_records"> Vehicle Records</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Transight Maps</span>
+                            <ul>
+                                <li>
+                                    <a href="#/transmap/trans_map"> Trans map</a>
+                                </li>
+                                <li>
+                                    <a href="#/transmap/route_trace"> Route Trace</a>
+                                </li>
+                                <li>
+                                    <a href="#/vehicle/spot_vehicle"> Spot Vehicle</a>
+                                </li>
+                                <li>
+                                    <a href="#/transmap/geo_fence"> Add Trans Fence</a>
+                                </li>
+                                <li>
+                                    <a href="#/transmap/view_geo_fence"> View Trans Fence</a>
+                                </li>
+                                <li>
+                                    <a href="#/transmap/assign_vehicle_geofence"> Assign Vehicle To Fence</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Trip Manager</span>
+                            <ul>
+                                <li>
+                                    <a href="#/vehicle/add_trips"> Add Trip</a>
+                                </li>
+                                <li>
+                                    <a href="#/vehicle/view_trip"> View Trip</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/trip_assigned"> Live Trips</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/trip_completion"> Completed Trips</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Expense Manager</span>
+                            <ul style="display: none;">
+                                <li>
+                                    <a href="#/expense/add_expense"> Add Expense</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/expense_report"> Vehicle Expenditure</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/expense_report_company_vehicle"> Company Expenditure</a>
+                                </li>
+                                <li>
+                                    <a href="#/expense/expense_chart"> Vehicle Expenditure Chart</a>
+                                </li>
+                                <li>
+                                    <a href="#/expense/total_expense_chart"> Company Expenditure Chart</a>
+                                </li>
+                                <li>
+                                    <a href="#/expense/add_expense_type"> Add Expense Type</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>User Management</span>
+                            <ul>
+                                <li>
+                                    <a href="#/password/change_password"> Change Password</a>
+                                </li>
+                                <li>
+                                    <a href="#/user/add_sub_users"> Add  User</a>
+                                </li>
+                                <li>
+                                    <a href="#/user/view_sub_user"> View  User</a>
+                                </li>
+                                <li>
+                                    <a href="#/user/set_sub_user_permission"> Set User Permission</a>
+                                </li>
+                                <li>
+                                    <a href="#/vehicle/assign_vehicle"> Assign Vehicle To User</a>
+                                </li>
+                                <li>
+                                    <a href="#/profile/profile_view"> Profile View</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/sub_user_details">  User Report</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Statistics</span>
+                            <ul>
+                                <li>
+                                    <a href="#/charts/milage"> Fuel Economy</a>
+                                </li>
+                                <li>
+                                    <a href="#/charts/fuel_refill"> Fuel Refill</a>
+                                </li>
+                                <li>
+                                    <a href="#/charts/engine_on"> Ignition Period</a>
+                                </li>
+                                <li>
+                                    <a href="#/charts/average_milage"> Average Fuel Economy</a>
+                                </li>
+                                <li>
+                                    <a href="#/charts/kilometers_run"> Distance</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Feedbacks</span>
+                            <ul>
+                                <li>
+                                    <a href="#/complaints/view_complaint"> View Feedbacks</a>
+                                </li>
+                                <li>
+                                    <a href="#/complaints/add_complaint"> Add Feedbacks</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Settings</span>
+                            <ul>
+                                <li>
+                                    <a href="#/settings/dashboard_settings">Dash Board settings</a>
+                                </li>
+                                <li>
+                                    <a href="#/settings/dashboard_alert_settings">Dash Board Alert setting</a>
+                                </li>
+                                <li>
+                                    <a href="#/settings/notification_settings">Notification Settings</a>
+                                </li>
+                                <li>
+                                    <a href="#/notification/notification_alert">Notifications</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                </div>
+                <!--Menu part ends-->
+                <div class="sidebuttons">
+                    <a href="notifications.html">
+                        <span class="notification">Notifications</span>
+                    </a>
+                    <a href="settings.html">
+                        <span class="settings">Settings</span>
+                    </a>
+                </div>
+            </div>
+            <div class="dashboardcontents">
+                <div id="column2" class="column ui-sortable" unselectable="on" style="-moz-user-select: none;">
+                    <div id="item2" class="dragbox">
+                        <div class="move">
+                            <div class="collapse">
+                                <img src="images/collapse.png"/>
+                            </div>
+                        </div>
+                        <div style="margin:0px 0px 0px 0px" class="dragbox-content">
+                            <div style="margin:0px;" id="tabs2">
+                                <ul style="margin:-45px 0 0 -35px">
+                                    <li>
+                                        <a href="#col2-tab1">Announcements</a>
+                                    </li>
+                                    <li style="padding-top:3px">
+                                        <img src="images/divider.png"/>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="padding:2%;line-height: 150%;font-size: 12pt;" id="col2-tab1">   
+                                The Global Positioning System (GPS) is a space-based satellite navigation system that provides location and time information in all weather conditions, anywhere on or near the Earth where there is an unobstructed line of sight to four or more GPS satellites
+                            </div>
+                            <div id="col2-tab2" style="display:none">
+                                
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div id="column2" class="column ui-sortable" unselectable="on" style="-moz-user-select: none; margin-left: 1%; width: 57%;">
+                    <div id="item2" class="dragbox">
+                        <div class="move">
+                            <div class="collapse">
+                                <img src="images/collapse.png"/>
+                            </div>
+                        </div>
+                        <div style="margin:0px 0px 0px 0px" class="dragbox-content">
+                            <div style="margin:0px;" id="tabs1">
+                                <ul style="margin:-45px 0 0 -35px">
+                                    <li class="active" style="margin-right:10px">
+                                        <a href="#col1-tab1">Companies</a>
+                                    </li>
+                                    <li style="padding-top:3px">
+                                        <img src="images/divider.png"/>
+                                    </li>
+                                    <li style="margin-left:10px">
+                                        <a href="#col1-tab2">Search</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="padding:0px;" id="col1-tab1">   
+                                <form id="addexpense">
+                                    <table style="padding: 1%">
+                                        <tbody>
+                                            <tr>
+                                                <td>Select vehicle<font color="#ff0000">*</font></td>
+                                                <td>
+                                                    <select id="vehicle_no" name="vehicle_no">
+                                                        <option value="">Select vehicle</option>
+                                                        <option value="4">KL/07/AR/9785</option>
+                                                        <option value="25">KL/40/B/9</option>
+                                                        <option value="26">KL/05/R/728</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr height="30" class="text">
+                                                <td>Select Date<font color="#ff0000">*</font></td>
+                                                <td>
+                                                    <input type="text" style="position: relative;" readonly="true" maxlength="10" size="20" tabindex="3" id="week_date1" name="week_date1" class="hasDatepicker"/>
+                                                </td>
+                                            </tr>
+                                            <tr height="30" class="text">
+                                                <td>Amount<font color="#ff0000">*</font></td>
+                                                <td><input type="text" id="amount" name="amount"></td>
+                                            </tr>
+                                            <tr height="30" class="text">
+                                                <td>Type<font color="#ff0000">*</font></td>
+                                                <td>
+                                                    <select id="expense_type" name="expense_type">
+                                                        <option value="">Select Type</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr height="30" class="text">
+                                                <td>Description</td>
+                                                <td>
+                                                    <textarea rows="6" cols="5" id="quantity" name="quantity" style="width: 124px; height: 17px;"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr height="30" class="text">
+                                                <td>Vendor Details<font color="#ff0000">*</font></td>
+                                                <td><input type="text" id="vendor_details" name="vendor_details"></td>
+                                            </tr>
+                                            <tr height="30" class="text">
+                                                <td></td>
+                                                <td align="left">
+                                                    <input type="submit" value="Submit" id="add_expense" name="add_expense"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                            <div id="col1-tab2" style="display:none">
+                                Search
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

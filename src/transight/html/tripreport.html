@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!--link href="css/layout.css" rel="stylesheet" type="text/css"></link-->
+        <link href="css/transight.css" rel="stylesheet" type="text/css"></link>
+        <script type="text/javascript" src="js/Jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+        <title>Dashboard | Transight</title>
+        <!--tabs-->
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $('#nav li').hover(function()
+                {
+                    var child = $(this).children(0)[0];
+                    if(child.nodeName!="A")
+                    {
+                        $(this).attr("class","span_hover");
+                    }
+                    else
+                    {
+                        console.log($(child).parent().parent());
+                        $("#nav li").css("height","");
+                    }
+                    $('ul', this).fadeIn(100);
+                },
+                function()
+                {
+                    $('ul', this).fadeOut(10);
+                    $(this).attr("class","");
+                });
+                
+            });
+        </script>
+    </head>
+    <body>
+        <!--Welcome header and the logo-->
+        <div class="header">
+            <div class="transightlogo">
+                <img src="images/transight-logo-new.png" alt="Transight" />
+            </div>
+            <div class="welcomemessagediv">
+                <div class="welcomemessage">Welcome,testuser</div>
+                <div class="userimage">
+                    <img src="images/alto.jpg"/>
+                </div>
+                <div class="logout">
+                    Logout
+                </div>
+            </div>
+        </div>
+        <!--Welcome header and the logo ends-->
+
+        <div class="contents">
+            <div class="menubar">
+                <!--Menu part-->
+                <div class="menus">
+                    <ul id="nav">
+                        <li>
+                            <span>Home</span>
+                        </li>
+                        <li>
+                            <span>Vehicles</span>
+                            <ul>
+                                <li>
+                                    <a href="#/vehicle/status_screen"> Vehicle Status</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/vehicle_report"> View Vehicles</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/general_report"> General Report</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/halt_report"> Trip Reports</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/fuel_alert"> Fuel Refills</a>
+                                </li>
+                                <li>
+                                    <a href="#/immobilizer/immobilizer_view"> Immobilizer</a>
+                                </li>
+                                <li>
+                                    <a href="#/#"> Safe Parking</a>
+                                </li>
+                                <li>
+                                    <a href="#/vehicle/vehicle_records"> Vehicle Records</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Transight Maps</span>
+                            <ul>
+                                <li>
+                                    <a href="#/transmap/trans_map"> Trans map</a>
+                                </li>
+                                <li>
+                                    <a href="#/transmap/route_trace"> Route Trace</a>
+                                </li>
+                                <li>
+                                    <a href="#/vehicle/spot_vehicle"> Spot Vehicle</a>
+                                </li>
+                                <li>
+                                    <a href="#/transmap/geo_fence"> Add Trans Fence</a>
+                                </li>
+                                <li>
+                                    <a href="#/transmap/view_geo_fence"> View Trans Fence</a>
+                                </li>
+                                <li>
+                                    <a href="#/transmap/assign_vehicle_geofence"> Assign Vehicle To Fence</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Trip Manager</span>
+                            <ul>
+                                <li>
+                                    <a href="#/vehicle/add_trips"> Add Trip</a>
+                                </li>
+                                <li>
+                                    <a href="#/vehicle/view_trip"> View Trip</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/trip_assigned"> Live Trips</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/trip_completion"> Completed Trips</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Expense Manager</span>
+                            <ul style="display: none;">
+                                <li>
+                                    <a href="#/expense/add_expense"> Add Expense</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/expense_report"> Vehicle Expenditure</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/expense_report_company_vehicle"> Company Expenditure</a>
+                                </li>
+                                <li>
+                                    <a href="#/expense/expense_chart"> Vehicle Expenditure Chart</a>
+                                </li>
+                                <li>
+                                    <a href="#/expense/total_expense_chart"> Company Expenditure Chart</a>
+                                </li>
+                                <li>
+                                    <a href="#/expense/add_expense_type"> Add Expense Type</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>User Management</span>
+                            <ul>
+                                <li>
+                                    <a href="#/password/change_password"> Change Password</a>
+                                </li>
+                                <li>
+                                    <a href="#/user/add_sub_users"> Add  User</a>
+                                </li>
+                                <li>
+                                    <a href="#/user/view_sub_user"> View  User</a>
+                                </li>
+                                <li>
+                                    <a href="#/user/set_sub_user_permission"> Set User Permission</a>
+                                </li>
+                                <li>
+                                    <a href="#/vehicle/assign_vehicle"> Assign Vehicle To User</a>
+                                </li>
+                                <li>
+                                    <a href="#/profile/profile_view"> Profile View</a>
+                                </li>
+                                <li>
+                                    <a href="#/report/sub_user_details">  User Report</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Statistics</span>
+                            <ul>
+                                <li>
+                                    <a href="#/charts/milage"> Fuel Economy</a>
+                                </li>
+                                <li>
+                                    <a href="#/charts/fuel_refill"> Fuel Refill</a>
+                                </li>
+                                <li>
+                                    <a href="#/charts/engine_on"> Ignition Period</a>
+                                </li>
+                                <li>
+                                    <a href="#/charts/average_milage"> Average Fuel Economy</a>
+                                </li>
+                                <li>
+                                    <a href="#/charts/kilometers_run"> Distance</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Feedbacks</span>
+                            <ul>
+                                <li>
+                                    <a href="#/complaints/view_complaint"> View Feedbacks</a>
+                                </li>
+                                <li>
+                                    <a href="#/complaints/add_complaint"> Add Feedbacks</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>Settings</span>
+                            <ul>
+                                <li>
+                                    <a href="#/settings/dashboard_settings">Dash Board settings</a>
+                                </li>
+                                <li>
+                                    <a href="#/settings/dashboard_alert_settings">Dash Board Alert setting</a>
+                                </li>
+                                <li>
+                                    <a href="#/settings/notification_settings">Notification Settings</a>
+                                </li>
+                                <li>
+                                    <a href="#/notification/notification_alert">Notifications</a>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                </div>
+                <!--Menu part ends-->
+                <div class="sidebuttons">
+                    <a href="#">
+                        <span class="notification">Notifications</span>
+                    </a>
+                    <a href="#">
+                        <span class="settings">Settings</span>
+                    </a>
+                </div>
+            </div>
+            <div class="dashboardcontents">
+                <div id="column2" class="column ui-sortable" unselectable="on" style="-moz-user-select: none;width:98%!important">
+                    <div id="item2" class="dragbox">
+                        <div class="move">
+                            <div style="float: left;margin-right: 1%;margin-left: 1%;">Trip report</div>
+                            <img src="images/divider.png"/>
+                            <div class="collapse">
+                                <img src="images/collapse.png"/>
+                            </div>
+                        </div>
+                        <div class="dragbox-content">
+                            <table style="width: 25%;margin: 1%">
+                                <tr>
+                                    <td>Select Vehicle</td>
+                                    <input type="hidden" value="2/" id="company_name" name="company_name"/>
+                                    <td>
+                                        <select id="vehicle_no" name="vehicle_no">
+                                            <option value="" selected="selected">Select</option>
+                                            <option value="4">KL/07/AR/9785</option>
+                                            <option value="25">KL/40/B/9</option>
+                                            <option value="26">KL/05/R/728</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr height="30" class="text">
+                                    <td>Select From Date</td>
+                                    <td>
+                                        <input type="text"  readonly="true" maxlength="10" size="20" tabindex="3" id="week_date1" name="week_date1" />
+                                    </td>
+                                </tr>
+                                <tr height="30" class="text">
+                                    <td>Select To Date</td>
+                                    <td>
+                                        <input type="text"  readonly="true" maxlength="10" size="20" tabindex="3" id="week_date2" name="week_date2"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" value="Submit" id="fuel_refill" name="fuel_refill"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <hr>
+                            <table style="width: 98%; margin: 1%;">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Starting point</th>
+                                        <th>Starting Time</th>
+                                        <th>Destination</th>
+                                        <th>Destination Time</th>
+                                        <th>Distance</th>
+                                        <th>Average Speed</th>
+                                        <th>Maximum Speed</th>
+                                        <th>Engine ON time</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,84 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package transight;
+
+import com.vancrafts.transight.common.CommonUtil;
+import com.vancrafts.transight.dao.UserDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import netscape.javascript.JSObject;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+/**
+ *
+ * @author zimr
+ */
+public class Dashboard extends Application
+{
+    CommonUtil commonUtil;
+    JdbcTemplate jdbcTemplate;
+    UserDao userDao = new UserDao();
+    
+    @Override
+    public void start(final Stage stage)
+    {
+        WebView webview = new WebView();
+        webview.getEngine().load(Dashboard.class.getResource("html/dashboard.html").toExternalForm());
+        final WebEngine webEngine = webview.getEngine();
+        webEngine.setJavaScriptEnabled(true);
+        Image icon = new Image(Dashboard.class.getResourceAsStream("html/images/trans-logo.png"));
+        stage.getIcons().add(icon);
+        webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Worker.State> ov, Worker.State t, Worker.State t1)
+            {
+                if (t1 == Worker.State.SUCCEEDED)
+                {
+                    JSObject window = (JSObject) webEngine.executeScript("window");
+                    String url = (String) webEngine.executeScript("window.location.href");
+                    url = url.substring(url.lastIndexOf("/")+1);
+                    window.setMember("dashboard", new com.vancrafts.transight.bridge.DashBoardDao(stage,webEngine));
+                    try
+                    {
+                        window.setMember("transight", CommonUtil.urlClassMap.get(url).newInstance());
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                    String menus = userDao.getMenuString();
+                    webEngine.executeScript("$('#nav').html('"+menus+"')");
+                    webEngine.executeScript("afterLoad()");
+                }
+            }
+        });
+        stage.setScene(new Scene(webview));
+        stage.setTitle("Transight | Dashboard");
+        stage.show();
+    }
+
+    /**
+     * The main() method is ignored in correctly deployed JavaFX application.
+     * main() serves only as fallback in case the application can not be
+     * launched through deployment artifacts, e.g., in IDEs with limited FX
+     * support. NetBeans ignores main().
+     *
+     * @param args the command line arguments
+     */
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+}

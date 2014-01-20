@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!--link href="css/layout.css" rel="stylesheet" type="text/css"></link-->
+        <link href="css/transight.css" rel="stylesheet" type="text/css"></link>
+        <script type="text/javascript" src="js/Jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+        <title>Dashboard | Transight</title>
+        <!--tabs-->
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $('#col2-tab2').hide();
+                $('#col2-tab1').show();
+                $('#tabs2 ul li a').each(function()
+                {
+                    $(this).click(function(event)
+                    {
+                        $('#tabs2 ul li').attr('class','');
+                        var href = $(this).attr("href");
+                        $(this).parent().addClass('active');
+                        href = href.replace("#","");
+                        $('#col2-tab2').hide();
+                        $('#col2-tab1').hide();
+                        $("#"+href).show();
+                        event.preventDefault();
+                        return false;
+                       
+                    });                    
+                });
+                
+                $('#col1-tab2').hide();
+                $('#col1-tab1').show();
+                $('#tabs1 ul li a').each(function()
+                {
+                    $(this).click(function(event)
+                    {
+                        $('#tabs1 ul li').attr('class','');
+                        var href = $(this).attr("href");
+                        href = href.replace("#","");
+                        $('#col1-tab2').hide();
+                        $('#col1-tab1').hide();
+                        $("#"+href).show();
+                        $(this).parent().addClass('active');
+                        event.preventDefault();
+                        return false;
+                       
+                    });                    
+                });
+                
+                var $items = $('#vtab ul li');
+                $items.mouseover(function()
+                {
+                    $items.removeClass('selected');
+                    $(this).addClass('selected');
+                    var index = $items.index($(this));
+                    $('#vtab span').hide().eq(index).show();
+                }).eq(1).mouseover();
+                
+            });
+        </script>
+    </head>
+    <body>
+        <!--Welcome header and the logo-->
+        <div class="header">
+            <div class="transightlogo">
+                <img src="images/transight-logo-new.png" alt="Transight" />
+            </div>
+            <div class="welcomemessagediv">
+                <div class="welcomemessage">Welcome,testuser</div>
+                <div class="userimage">
+                    <img src="images/alto.jpg"/>
+                </div>
+                <div class="logout">
+                    Logout
+                </div>
+            </div>
+        </div>
+        <!--Welcome header and the logo ends-->
+
+        <div class="contents">
+            <div class="menubar">
+                <!--Menu part-->
+                <div class="menus">
+                    <ul id="nav"></ul>
+                </div>
+                <!--Menu part ends-->
+                <div class="sidebuttons">
+                    <a href="notifications.html">
+                        <span class="notification">Notifications</span>
+                    </a>
+                    <a href="settings.html">
+                        <span class="settings">Settings</span>
+                    </a>
+                </div>
+            </div>
+            <div class="dashboardcontents">
+                <div id="column2" class="column ui-sortable" unselectable="on" style="-moz-user-select: none;">
+                    <div id="item2" class="dragbox">
+                        <div class="move">
+                            <div class="collapse">
+                                <img src="images/collapse.png"/>
+                            </div>
+                        </div>
+                        <div style="margin:0px 0px 0px 0px" class="dragbox-content">
+                            <div style="margin:0px;" id="tabs2">
+                                <ul style="margin:-45px 0 0 -35px">
+                                    <li class="active">
+                                        <a href="#col2-tab1">Alerts</a>
+                                    </li>
+                                    <li style="padding-top:3px">
+                                        <img src="images/divider.png"/>
+                                    </li>
+                                    <li>
+                                        <a href="#col2-tab2">Settings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="padding:0px;" id="col2-tab1">   
+                                <span id="vtab">
+                                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                            <tr>
+                                                <td width="127px" valign="top" class="panel-change-menu">
+                                                    <ul>
+                                                        <li class="transfence">Trans Fence</li>
+                                                        <li class="overspeed">Over Speed</li>
+                                                        <li class="tripcompletion">Trip Completion</li>
+                                                        <li class="rootdivertion selected">Halt</li>
+                                                    </ul>
+                                                </td>
+                                                <td width="1"></td>
+                                                <td valign="top">
+                                                    <span style="display: none;">
+                                                        <table cellspacing="0" border="0" style="border: 1px solid #ccc;" id="fencetable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th sort="index">Vehicle</th>
+                                                                    <th sort="date">Trans Fence</th>
+                                                                    <th sort="description">Status</th>
+                                                                    <th sort="beds">Time</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                            <!--tfoot>
+                                                                <tr>
+                                                                    <td colspan="4" align="center">
+                                                                        <a href="#">More</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot-->
+                                                        </table>
+                                                    </span>
+                                                    <span style="display: none;">
+                                                        <table cellspacing="0" border="0" style="border: 1px solid #ccc;" id="overspeedtable">
+                                                            <thead>
+                                                                <tr><th sort="index">Vehicle</th>
+                                                                    <th>Max Speed </th>
+                                                                    <th sort="beds">Over Speed </th>
+                                                                    <th sort="description">Date &amp; Time</th>
+                                                                </tr></thead>
+                                                            <tbody></tbody>
+                                                            <!--tfoot>
+                                                                <tr>
+                                                                    <td colspan="4" align="center">
+                                                                        <a href="#">More</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot-->
+                                                        </table>
+                                                    </span>
+                                                    <span style="display: none;">
+                                                        <table cellspacing="0" border="0" style="border: 1px solid #ccc;" id="tripcompletion">
+                                                            <thead>
+                                                                <tr><th sort="index">Vehicle</th>
+                                                                    <th sort="beds">Destination</th>
+                                                                    <th sort="description">Date &amp; Time</th>
+                                                                    <th sort="date">Trip Kilometers</th>
+                                                                </tr></thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                            <!--tfoot>
+                                                                <tr>
+                                                                    <td colspan="4" align="center">
+                                                                        <a href="#">More</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot-->
+                                                        </table>
+                                                    </span>
+                                                    <span style="display: inline;">
+                                                        <table cellspacing="0" border="0" style="border: 1px solid #ccc;" id="halttable">
+                                                            <thead>
+                                                                <tr><th sort="index">Vehicle</th>
+                                                                    <th sort="description">Date &amp; Time</th>
+                                                                    <th sort="beds">Location</th>
+                                                                </tr></thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                            <!--tfoot>
+                                                                <tr>
+                                                                    <td colspan="4" align="center">
+                                                                        <a href="#">More</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot-->
+                                                        </table>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                </span>
+                            </div>
+                            <div id="col2-tab2" style="display:none">
+                                Settings...
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div id="column2" class="column ui-sortable" unselectable="on" style="-moz-user-select: none;width: 58%">
+                    <div id="item2" class="dragbox">
+                        <div class="move">
+                            <div class="collapse">
+                                <img src="images/collapse.png"/>
+                            </div>
+                        </div>
+                        <div style="margin:0px 0px 0px 0px" class="dragbox-content">
+                            <div style="margin:0px;" id="tabs1">
+                                <ul style="margin:-45px 0 4% -35px">
+                                    <li class="active" style="margin-right:10px">
+                                        <a href="#col1-tab1">Companies</a>
+                                    </li>
+                                    <li style="padding-top:3px">
+                                        <img src="images/divider.png"/>
+                                    </li>
+                                    <li style="margin-left:10px">
+                                        <a href="#col1-tab2">Search</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="padding:0px;" id="col1-tab1">   
+                                <div class="transightaddress">
+                                    <div class="transightpic">
+                                        <img src="images/logo-dashboard.png"/>
+                                    </div>
+                                    <div class="transight">Vancrafts</div>
+                                    <div class="transight_address">India Telecom Innovation Hub, Kinfra Hi-Tech Park  Kalamassery Cochin</div>
+                                </div>
+                                <div class="vehicles">
+                                    <div class="vehicle1">
+                                        <div class="vehicleimage">
+                                            <img src="images/alto.jpg"/>
+                                        </div>
+                                        <div class="vehiclemeter">
+                                            <div class="currentspeed">
+                                                0
+                                            </div>
+                                            <div class="unit">
+                                                KMPH
+                                            </div>
+                                            <div class="currentspeed1">
+                                                <ul style="list-style: none;padding:0%">
+                                                    <li>
+                                                        <img src="images/petrol_bung.jpg"/>
+                                                    </li>
+                                                    <li class="fuelprogress">
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        <span class="odo">ODO</span>
+                                                        <span class="kms">2563.5</span>
+                                                        <span class="km">Km</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="vehiclestatus">
+                                            <ul style="list-style: none;padding-left: 1%;width:100%">
+                                                <li class="address">Vidya Nagar Colony, Thrikkakara, Edappally, Ernakulam, Kerala, India</li>
+                                                <li class="ignition">Ignition  :  12:31PM |24/12/2013</li>
+                                                <li class="lastsignal">Last Signal  :  10:48AM |25/12/2013</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="vehicle1">
+                                        <div class="vehicleimage">
+                                            <img src="images/alto.jpg"/>
+                                        </div>
+                                        <div class="vehiclemeter">
+                                            <div class="currentspeed">
+                                                0
+                                            </div>
+                                            <div class="unit">
+                                                KMPH
+                                            </div>
+                                            <div class="currentspeed1">
+                                                <ul style="list-style: none;padding:0%">
+                                                    <li>
+                                                        <img src="images/petrol_bung.jpg"/>
+                                                    </li>
+                                                    <li class="fuelprogress">
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        <span class="odo">ODO</span>
+                                                        <span class="kms">2563.5</span>
+                                                        <span class="km">Km</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="vehiclestatus">
+                                            <ul style="list-style: none;padding-left: 1%;width:100%">
+                                                <li class="address">Vidya Nagar Colony, Thrikkakara, Edappally, Ernakulam, Kerala, India</li>
+                                                <li class="ignition">Ignition  :  12:31PM |24/12/2013</li>
+                                                <li class="lastsignal">Last Signal  :  10:48AM |25/12/2013</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="vehicle1">
+                                        <div class="vehicleimage">
+                                            <img src="images/alto.jpg"/>
+                                        </div>
+                                        <div class="vehiclemeter">
+                                            <div class="currentspeed">
+                                                0
+                                            </div>
+                                            <div class="unit">
+                                                KMPH
+                                            </div>
+                                            <div class="currentspeed1">
+                                                <ul style="list-style: none;padding:0%">
+                                                    <li>
+                                                        <img src="images/petrol_bung.jpg"/>
+                                                    </li>
+                                                    <li class="fuelprogress">
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        <span class="odo">ODO</span>
+                                                        <span class="kms">2563.5</span>
+                                                        <span class="km">Km</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="vehiclestatus">
+                                            <ul style="list-style: none;padding-left: 1%;width:100%">
+                                                <li class="address">Vidya Nagar Colony, Thrikkakara, Edappally, Ernakulam, Kerala, India</li>
+                                                <li class="ignition">Ignition  :  12:31PM |24/12/2013</li>
+                                                <li class="lastsignal">Last Signal  :  10:48AM |25/12/2013</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="col1-tab2" style="display:none">
+                                Search
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
